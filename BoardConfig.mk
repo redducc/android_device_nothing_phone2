@@ -131,3 +131,6 @@ include device/qcom/wlan/taro/BoardConfigWlan.mk
 
 # Vendor BoardConfig
 include vendor/nothing/phone2/BoardConfigVendor.mk
+
+# Dolby Atmos
+-include vendor/dolby/BoardConfigDolby.mk

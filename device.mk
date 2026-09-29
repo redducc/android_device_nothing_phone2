@@ -262,3 +262,6 @@ PRODUCT_COPY_FILES += \
 # Vendor Makefile
 $(call inherit-product, vendor/nothing/phone2/phone2-vendor.mk)
 $(call inherit-product-if-exists, vendor/nothing/camera/nothing-camera.mk)
+
+# Dolby Atmos
+$(call inherit-product-if-exists, vendor/dolby/dolby.mk)
