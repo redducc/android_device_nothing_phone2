@@ -176,7 +176,8 @@ PRODUCT_PACKAGES += \
 
 # Paranoid Glyph
 PRODUCT_PACKAGES += \
-    ParanoidGlyphPhone2
+    ParanoidGlyphPhone2 \
+    android.hardware.light-service.glyph
 
 # Partitions - Dynamic
 PRODUCT_BUILD_ODM_IMAGE := true

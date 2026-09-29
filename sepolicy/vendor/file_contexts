@@ -5,6 +5,7 @@
 
 # LEDs
 /sys/devices/platform/soc/994000.i2c/i2c-0/0-003a/leds/led_strips(/.*)?                            u:object_r:sysfs_leds:s0
+/vendor/bin/hw/android\.hardware\.light-service\.glyph                                            u:object_r:hal_light_default_exec:s0
 
 # NFC
 /dev/pn553                                                                                         u:object_r:nfc_device:s0
