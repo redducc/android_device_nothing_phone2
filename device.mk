@@ -86,9 +86,6 @@ $(call soong_config_set,surfaceflinger,udfps_lib,//$(DEVICE_PATH):libudfps_exten
 
 TARGET_USES_FOD_ZPOS := true
 
-# Bluetooth
-$(call soong_config_set_bool,qssi_bluetooth,enable_delay_in_ms,true)
-
 # Camera
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.concurrent.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.concurrent.xml \
