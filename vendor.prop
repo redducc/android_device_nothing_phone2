@@ -1,6 +1,7 @@
 # Audio
 persist.vendor.audio_hal.dsp_bit_width_enforce_mode=24
 ro.vendor.audio.downmix.attenuation=1
+vendor.audio.c2.preferred=true
 
 # Bluetooth
 bluetooth.hardware.power.idle_cur_ma=6
@@ -46,6 +47,7 @@ ro.hardware.keystore_desede=true
 
 # Media
 debug.stagefright.c2inputsurface=-1
+media.c2.hal.selection=aidl
 vendor.media.omx=0
 
 # Netflix
