@@ -13,10 +13,9 @@ from extract_utils.fixups_lib import (
 from extract_utils.main import ExtractUtils, ExtractUtilsModule
 
 namespace_imports = [
-    "vendor/qcom/common/vendor/adreno/s",
-    "vendor/qcom/common/vendor/display/5.10",
-    "vendor/qcom/common/vendor/media/5.10",
+    "vendor/qcom/common/vendor/display",
     "vendor/qcom/common/vendor/perf",
+    "vendor/qcom/common/vendor/qseecomd",
     "vendor/qcom/common/vendor/wlan",
 ]
 
@@ -84,13 +83,35 @@ lib_fixups: lib_fixups_user_type = {
         'vendor.qti.ims.rcsuce@*',
         'vendor.qti.imsrtpservice@3.0',
         'vendor.qti.latency@*',
+        'vendor.display.color@1.0',
+        'vendor.display.color@1.1',
+        'vendor.display.color@1.2',
+        'vendor.display.color@1.3',
+        'vendor.display.color@1.4',
+        'vendor.display.color@1.5',
+        'vendor.display.postproc@1.0',
+        'vendor.qti.hardware.iop@2.0',
+        'vendor.qti.hardware.perf@2.0',
+        'vendor.qti.hardware.perf@2.1',
+        'vendor.qti.hardware.perf@2.2',
+        'vendor.qti.hardware.perf2-V1-ndk',
+        'vendor.qti.qspmhal-V1-ndk',
     ): lib_fixup_vendor_suffix,
     (
+        'libcdsprpc',
+        'libpalclient',
+        'libqrtr',
+        'libthermalclient',
         'libwpa_client',
+        'vendor.qti.memory.pasrmanager-V1-ndk',
+        'vendor.qti.snapdragonServices-V2-ndk',
+        'vendor.qti.snapdragonServices.qape-V1-ndk',
     ): lib_fixup_remove,
 }
 
 blob_fixups: blob_fixups_user_type = {
+    'system_ext/etc/seccomp_policy/perfservice.policy': blob_fixup()
+        .add_line_if_missing('lseek: 1'),
     'vendor/etc/audio/sku_cape/resourcemanager_waipio_qrd.xml': blob_fixup()
         .regex_replace('<speaker_protection_enabled>1<', '<speaker_protection_enabled>0<'),
     'vendor/bin/hw/android.hardware.power.stats-service': blob_fixup()
