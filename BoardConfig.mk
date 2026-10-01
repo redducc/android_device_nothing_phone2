@@ -128,6 +128,12 @@ SOONG_CONFIG_ufsbsg_ufsframework := bsg
 TARGET_WLAN_CHIP := qca6490
 
 include device/qcom/wlan/taro/BoardConfigWlan.mk
+# Stripping drops the signature 6.6 GKI requires on its protected modules (zsmalloc, zram...)
+BOARD_DO_NOT_STRIP_VENDOR_MODULES := true
+BOARD_DO_NOT_STRIP_VENDOR_RAMDISK_MODULES := true
+
+# The prebuilt kernel already ships the WLAN module
+BOARD_VENDOR_KERNEL_MODULES := $(filter-out $(KERNEL_MODULES_OUT)/%,$(BOARD_VENDOR_KERNEL_MODULES))
 
 # Vendor BoardConfig
 include vendor/nothing/phone2/BoardConfigVendor.mk

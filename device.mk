@@ -70,6 +70,9 @@ $(call soong_config_set,surfaceflinger,udfps_lib,//$(DEVICE_PATH):libudfps_exten
 
 TARGET_USES_FOD_ZPOS := true
 
+# Bluetooth
+$(call soong_config_set_bool,qssi_bluetooth,enable_delay_in_ms,true)
+
 # Camera
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.camera.concurrent.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.camera.concurrent.xml \
@@ -80,6 +83,9 @@ PRODUCT_COPY_FILES += \
 
 # Dalvik
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
+
+# Data
+SOONG_CONFIG_rmnetctl_old_rmnet_data := true
 
 # DebugFS
 PRODUCT_SET_DEBUGFS_RESTRICTIONS := true
@@ -121,6 +127,12 @@ PRODUCT_PACKAGES += \
     init.nt.rc \
     init.target.rc \
     ueventd.phone2.rc
+
+# Kernel
+KERNEL_PREBUILT_DIR := device/nothing/phone2-kernel
+TARGET_KERNEL_PREBUILT_TECHPACKS := true
+TARGET_KERNEL_VERSION := 6.6
+TARGET_USES_PREBUILT_KERNEL := true
 
 # Keymaster
 PRODUCT_COPY_FILES += \
