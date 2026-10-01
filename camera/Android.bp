@@ -1,0 +1,11 @@
+//
+// SPDX-FileCopyrightText: Paranoid Android
+// SPDX-License-Identifier: Apache-2.0
+//
+
+cc_library_shared {
+    name: "libntcam_shim",
+    srcs: ["ntcam_shim.cpp"],
+    shared_libs: ["libui"],
+    vendor: true,
+}

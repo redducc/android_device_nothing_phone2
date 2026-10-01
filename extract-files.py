@@ -13,6 +13,7 @@ from extract_utils.fixups_lib import (
 from extract_utils.main import ExtractUtils, ExtractUtilsModule
 
 namespace_imports = [
+    "device/nothing/phone2",
     "vendor/qcom/common/vendor/display",
     "vendor/qcom/common/vendor/perf",
     "vendor/qcom/common/vendor/qseecomd",
@@ -137,10 +138,15 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('libbase_shim.so'),
     'vendor/lib64/vendor.libdpmframework.so': blob_fixup()
         .add_needed('libhidlbase_shim.so'),
-    (
-        'vendor/lib64/libntcamallocator.so',
-        'vendor/lib64/vendor.noth.hardware.camera-service-impl.so',
-    ): blob_fixup().add_needed('libui_shim.so'),
+    'vendor/lib64/libntcamallocator.so': blob_fixup()
+        .add_needed('libui_shim.so'),
+    'vendor/lib64/vendor.noth.hardware.camera-service-impl.so': blob_fixup()
+        .add_needed('libui_shim.so')
+        .add_needed('libntcam_shim.so')
+        .binary_regex_replace(
+            b'_ZN7android19GraphicBufferMapper12importBufferEPK13native_handlejjjimjPS3_',
+            b'_ZN7android19GraphicBufferMapper12importBuffeREPK13native_handlejjjimjPS3_',
+        ),
     'vendor/etc/init/vendor.noth.hardware.camera-service.rc': (
         blob_fixup().regex_replace(r'\bNtCamAlgoCapacity\b', 'CameraServiceCapacity')
     ),
