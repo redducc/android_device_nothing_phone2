@@ -1,0 +1,9 @@
+typeattribute vendor_qspmsvc coredomain;
+type vendor_qspmsvc_exec, exec_type, system_file_type, file_type;
+
+init_daemon_domain(vendor_qspmsvc)
+add_service(vendor_qspmsvc, vendor_qspmsvc_service)
+binder_use(vendor_qspmsvc)
+binder_call(vendor_qspmsvc, system_server)
+binder_service(vendor_qspmsvc)
+hal_client_domain(vendor_qspmsvc, hal_thermal)
