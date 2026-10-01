@@ -474,6 +474,11 @@
         <fqname>@1.1::ITrustedInput/default</fqname>
         <fqname>@1.1::ITrustedInput/qtee-vm</fqname>
     </hal>
+    <hal format="aidl">
+        <name>android.hardware.audio.core</name>
+        <version>4</version>
+        <fqname>IModule/bluetooth</fqname>
+    </hal>
     <!-- SPU service-->
     <hal format="hidl">
         <name>vendor.qti.spu</name>
