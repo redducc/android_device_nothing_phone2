@@ -98,9 +98,6 @@ lib_fixups: lib_fixups_user_type = {
         'vendor.qti.qspmhal-V1-ndk',
     ): lib_fixup_vendor_suffix,
     (
-        'libcdsprpc',
-        'libpalclient',
-        'libqrtr',
         'libthermalclient',
         'libwpa_client',
         'vendor.qti.memory.pasrmanager-V1-ndk',
