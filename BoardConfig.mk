@@ -43,7 +43,7 @@ BOARD_BOOTCONFIG := androidboot.hardware=qcom androidboot.memcg=1 androidboot.us
 BOARD_BOOT_HEADER_VERSION := 4
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_KERNEL_BASE := 0x00000000
-BOARD_KERNEL_CMDLINE := msm_geni_serial.con_enabled=0
+BOARD_KERNEL_CMDLINE := msm_geni_serial.con_enabled=0 qcom_dload_mode.download_mode=0
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_SEPARATED_DTBO := true
 BOARD_MKBOOTIMG_ARGS := --header_version $(BOARD_BOOT_HEADER_VERSION)
