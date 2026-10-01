@@ -1292,9 +1292,6 @@ vendor/etc/media_profiles_V1_0.xml
 vendor/etc/media_profiles_cape.xml
 vendor/lib64/libmmosal_vendor.so
 
-# Memory
-vendor/lib64/libvmmem.so
-
 # MMI
 vendor/bin/hw/vendor.qti.hardware.factory@1.0-service
 vendor/bin/mmid
