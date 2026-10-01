@@ -1,1 +1,1 @@
-/system_ext/bin/qspmsvc    u:object_r:vendor_qspmsvc_exec:s0
+/system_ext/bin/qspmsvc    u:object_r:vendor_perfservice_exec:s0
