@@ -82,8 +82,11 @@ int64_t msFromNs(int64_t nanos) {
 }
 
 HalProxy::HalProxy() {
-    const char* kMultiHalConfigFile = "/vendor/etc/sensors/hals.conf";
-    initializeSubHalListFromConfigFile(kMultiHalConfigFile);
+    static const std::string kMultiHalConfigFiles[] = {"/vendor/etc/sensors/hals.conf",
+                                                       "/odm/etc/sensors/hals.conf"};
+    for (const std::string& configFile : kMultiHalConfigFiles) {
+        initializeSubHalListFromConfigFile(configFile.c_str());
+    }
     init();
 }
 
@@ -124,7 +127,9 @@ Return<void> HalProxy::getSensorsList_2_1(ISensorsV2_1::getSensorsList_2_1_cb _h
 Return<void> HalProxy::getSensorsList(ISensorsV2_0::getSensorsList_cb _hidl_cb) {
     std::vector<V1_0::SensorInfo> sensors;
     for (const auto& iter : mSensors) {
+      if (iter.second.type != SensorType::HINGE_ANGLE) {
         sensors.push_back(convertToOldSensorInfo(iter.second));
+      }
     }
     _hidl_cb(sensors);
     return Void();
@@ -259,8 +264,8 @@ Return<Result> HalProxy::initializeCommon(
         Result currRes = mSubHalList[i]->initialize(this, this, i);
         if (currRes != Result::OK) {
             result = currRes;
-            ALOGE("Subhal '%s' failed to initialize.", mSubHalList[i]->getName().c_str());
-            break;
+            ALOGE("Subhal '%s' failed to initialize with reason %" PRId32 ".",
+                  mSubHalList[i]->getName().c_str(), static_cast<int32_t>(currRes));
         }
     }
 
@@ -346,13 +351,13 @@ Return<void> HalProxy::configDirectReport(int32_t sensorHandle, int32_t channelH
     return Return<void>();
 }
 
-Return<void> HalProxy::debug(const hidl_handle& fd, const hidl_vec<hidl_string>& /*args*/) {
+Return<void> HalProxy::debug(const hidl_handle& fd, const hidl_vec<hidl_string>& args) {
     if (fd.getNativeHandle() == nullptr || fd->numFds < 1) {
         ALOGE("%s: missing fd for writing", __FUNCTION__);
         return Void();
     }
 
-    android::base::borrowed_fd writeFd = dup(fd->data[0]);
+    int writeFd = fd->data[0];
 
     std::ostringstream stream;
     stream << "===HalProxy===" << std::endl;
@@ -380,7 +385,7 @@ Return<void> HalProxy::debug(const hidl_handle& fd, const hidl_vec<hidl_string>&
         stream << "  Name: " << subHal->getName() << std::endl;
         stream << "  Debug dump: " << std::endl;
         android::base::WriteStringToFd(stream.str(), writeFd);
-        subHal->debug(fd, {});
+        subHal->debug(fd, args);
         stream.str("");
         stream << std::endl;
     }
@@ -496,7 +501,6 @@ void HalProxy::initializeSensorList() {
                     if (sensor.typeAsString == "android.sensor.wrist_tilt_gesture") {
                         sensor.type = V2_1::SensorType::PICK_UP_GESTURE;
                         sensor.typeAsString = SENSOR_STRING_TYPE_PICK_UP_GESTURE;
-                        ALOGV("Patched spacewar pickup sensor");
                     }
 
                     mSensors[sensor.sensorHandle] = sensor;
@@ -590,7 +594,8 @@ void HalProxy::handlePendingWrites() {
                         static_cast<uint32_t>(EventQueueFlagBits::EVENTS_READ),
                         static_cast<uint32_t>(EventQueueFlagBits::READ_AND_PROCESS),
                         kPendingWriteTimeoutNs, mEventQueueFlag)) {
-                ALOGE("Dropping %zu events after blockingWrite failed.", numToWrite);
+                ALOGE("Dropping %zu events after blockingWrite failed (is system_server running?).",
+                      numToWrite);
                 if (numWakeupEvents > 0) {
                     if (pendingWriteEvents.size() > eventQueueSize) {
                         decrementRefCountAndMaybeReleaseWakelock(

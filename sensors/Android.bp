@@ -4,11 +4,14 @@
 // SPDX-License-Identifier: Apache-2.0
 //
 
+vintf_fragment {
+    name: "android.hardware.sensors-phone2-multihal.xml",
+    src: "android.hardware.sensors-phone2-multihal.xml",
+    vendor: true,
+}
+
 cc_binary {
-    name: "android.hardware.sensors@2.1-service.phone2-multihal",
-    defaults: [
-        "hidl_defaults",
-    ],
+    name: "android.hardware.sensors-service.phone2-multihal",
     vendor: true,
     relative_install_path: "hw",
     srcs: [
@@ -16,16 +19,19 @@ cc_binary {
         "HalProxy.cpp",
         "HalProxyCallback.cpp",
     ],
-    init_rc: ["android.hardware.sensors@2.1-service.phone2-multihal.rc"],
-    vintf_fragments: ["android.hardware.sensors@2.1.phone2-multihal.xml"],
+    init_rc: ["android.hardware.sensors-service.phone2-multihal.rc"],
+    vintf_fragment_modules: ["android.hardware.sensors-phone2-multihal.xml"],
     header_libs: [
+        "android.hardware.sensors@2.X-multihal.header",
         "android.hardware.sensors@2.X-shared-utils",
     ],
     shared_libs: [
         "android.hardware.sensors@2.0",
         "android.hardware.sensors@2.0-ScopedWakelock",
         "android.hardware.sensors@2.1",
+        "android.hardware.sensors-V3-ndk",
         "libbase",
+        "libbinder_ndk",
         "libcutils",
         "libfmq",
         "libhidlbase",
@@ -35,7 +41,8 @@ cc_binary {
     ],
     static_libs: [
         "android.hardware.sensors@1.0-convert",
-        "android.hardware.sensors@2.X-multihal",
+        "android.hardware.sensors@aidl-multihal",
+        "libaidlcommonsupport",
     ],
 }
 
