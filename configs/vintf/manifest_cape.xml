@@ -512,15 +512,6 @@
         </interface>
     </hal>
 
-    <hal format="hidl">
-        <name>android.hardware.camera.provider</name>
-        <transport>hwbinder</transport>
-        <version>2.7</version>
-        <interface>
-            <name>ICameraProvider</name>
-            <instance>legacy/1</instance>
-        </interface>
-    </hal>
 
     <!-- WifiStats HAL service -->
     <hal format="hidl">

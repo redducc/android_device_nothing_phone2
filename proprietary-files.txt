@@ -174,7 +174,6 @@ system_ext/etc/permissions/com.nothing.feature_qcom.xml
 system_ext/framework/androidx.camera.extensions.impl.advanced.jar
 system_ext/lib64/libencoderjpeg_jni.so
 vendor/bin/hw/vendor.noth.hardware.camera-service
-vendor/bin/hw/vendor.qti.camera.provider@2.7-service_64
 vendor/etc/camera/camerainfo.xml
 vendor/etc/camera/camxoverridesettings.txt
 vendor/etc/camera/CFR_para4_Nothing_M_v100-8_AI.bin
@@ -293,7 +292,6 @@ vendor/etc/camera/nothing_noise_stat.bin
 vendor/etc/camera/nothing_pipeline.bin
 vendor/etc/camera/ntcamoverridesettings.txt
 vendor/etc/init/vendor.noth.hardware.camera-service.rc
-vendor/etc/init/vendor.qti.camera.provider@2.7-service_64.rc
 vendor/etc/permissions/com.nothing.features_vnd.xml
 vendor/etc/vintf/manifest/vendor.noth.hardware.camera-service.xml
 vendor/lib64/camera.device@1.0-impl.so
@@ -487,22 +485,6 @@ vendor/lib64/camera/node/com.nothing.node.turbonightfront.so
 vendor/lib64/camera/node/com.nothing.node.watermark.so
 vendor/lib64/camera/node/com.nothing.node.y2y.so
 vendor/lib64/camera/node/com.nothing.node.yuvhdr.so
-vendor/lib64/camx.device@3.2-impl.so
-vendor/lib64/camx.device@3.3-impl.so
-vendor/lib64/camx.device@3.4-ext-impl.so
-vendor/lib64/camx.device@3.4-impl.so
-vendor/lib64/camx.device@3.5-ext-impl.so
-vendor/lib64/camx.device@3.5-impl.so
-vendor/lib64/camx.device@3.6-ext-impl.so
-vendor/lib64/camx.device@3.6-impl.so
-vendor/lib64/camx.device@3.7-impl.so
-vendor/lib64/camx.provider@2.4-external.so
-vendor/lib64/camx.provider@2.4-impl.so
-vendor/lib64/camx.provider@2.4-legacy.so
-vendor/lib64/camx.provider@2.5-external.so
-vendor/lib64/camx.provider@2.5-legacy.so
-vendor/lib64/camx.provider@2.6-legacy.so
-vendor/lib64/camx.provider@2.7-legacy.so
 vendor/lib64/com.qti.chiusecaseselector.so
 vendor/lib64/com.qti.feature2.anchorsync.so
 vendor/lib64/com.qti.feature2.demux.so
@@ -588,7 +570,6 @@ vendor/lib64/libcamxfdalgo.so
 vendor/lib64/libcamxfdengine.so
 vendor/lib64/libcamxhwnodecontext.so
 vendor/lib64/libcamxifestriping.so
-vendor/lib64/libcamximageformatutils.so
 vendor/lib64/libcamxqsatalgo.so
 vendor/lib64/libcamxsettingsmanager.so
 vendor/lib64/libcamxstatscore.so
@@ -1927,3 +1908,10 @@ vendor/lib64/vendor.qti.snapdragonServices.qape-V1-ndk.so|d456c64ed880897a2e888f
 # Performance (IRQBalance) - from LA.VENDOR.13.2.6.r1-02200-KAILUA.0
 vendor/bin/msm_irqbalance|e9bb0e6659ae494e03627bb9c11301e483dedeac
 
+# Camera provider - from PDX257 ELBE-1.1.0-REL-260522-1202
+vendor/bin/hw/vendor.qti.camera.provider-service_64|f2566187feed4d735b9350aeb7290ad467359116
+vendor/etc/init/vendor.qti.camera.provider-service_64.rc|a4cec1edb4312381e19f8d7246cd4727c5bbe935
+vendor/etc/vintf/manifest/vendor.qti.camera.provider.xml|a9c4f3de3f7d8b0841d75e2d1940dd5503c36892
+vendor/lib64/camx.device-impl.so|69596cb9d17b19d702f10f5f221c3c4fc12bd8bf
+vendor/lib64/camx.provider-impl.so|3cbbb02ad6beb46bf43652efdae3801075d8b0f3
+vendor/lib64/libcamximageformatutils.so|1748a050feb507842325d954be3a64fee28cb0a0|c39823bc128cc0db1c66dee8a568bd530872ed2a
