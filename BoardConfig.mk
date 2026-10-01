@@ -138,5 +138,3 @@ BOARD_VENDOR_KERNEL_MODULES := $(filter-out $(KERNEL_MODULES_OUT)/%,$(BOARD_VEND
 # Vendor BoardConfig
 include vendor/nothing/phone2/BoardConfigVendor.mk
 
-# Dolby Atmos
--include vendor/dolby/BoardConfigDolby.mk

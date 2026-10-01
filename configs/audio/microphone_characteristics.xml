@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+     SPDX-FileCopyrightText: The LineageOS Project
+     SPDX-License-Identifier: Apache-2.0
+-->
+<MicrophoneInfoAndDynamicInfo>
+    <MicrophoneInfoList>
+        <MicrophoneInfo>
+            <id>builtin_mic_1</id>
+            <device name="IN_MICROPHONE" address="bottom"/>
+            <location>MAINBODY</location>
+            <group>0</group>
+            <indexInTheGroup>0</indexInTheGroup>
+            <sensitivity leveldBFS="-37.0" maxSpldB="132.5" minSpldB="28.5"/>
+            <directionality>OMNI</directionality>
+            <frequencyResponse>
+                <frequencyHz>50.00 100.00 200.00 300.00 500.00 1000.00 2000.00 3000.00 5000.00 8000.00</frequencyHz>
+                <leveldB>-3.00 -0.50 -0.50 0.00 0.00 0.00 0.00 -0.50 0.00 1.50</leveldB>
+            </frequencyResponse>
+            <position x="0.0269" y="0.0058" z="0.0079"/>
+            <orientation x="0.0" y="0.0" z="1.0"/>
+        </MicrophoneInfo>
+        <MicrophoneInfo>
+            <id>builtin_mic_2</id>
+            <device name="IN_MICROPHONE_BACK" address="back"/>
+            <location>MAINBODY</location>
+            <group>0</group>
+            <indexInTheGroup>1</indexInTheGroup>
+            <sensitivity leveldBFS="-37.0" maxSpldB="132.5" minSpldB="28.5"/>
+            <directionality>OMNI</directionality>
+            <frequencyResponse>
+                <frequencyHz>50.00 100.00 200.00 300.00 500.00 1000.00 2000.00 3000.00 5000.00 8000.00</frequencyHz>
+                <leveldB>-3.00 -0.50 -0.50 0.00 0.00 0.00 0.00 -0.50 0.00 1.50</leveldB>
+            </frequencyResponse>
+            <position x="0.0546" y="0.1456" z="0.00415"/>
+            <orientation x="0.0" y="1.0" z="0.0"/>
+        </MicrophoneInfo>
+    </MicrophoneInfoList>
+
+    <MicrophoneDynamicInfoList>
+        <MicrophoneDynamicInfo>
+            <device>PAL_DEVICE_IN_HANDSET_MIC</device>
+            <MicInfo id="builtin_mic_1" channelMapping="PROCESSED"/>
+        </MicrophoneDynamicInfo>
+
+        <MicrophoneDynamicInfo>
+            <device>PAL_DEVICE_IN_SPEAKER_MIC</device>
+            <MicInfo id="builtin_mic_2" channelMapping="PROCESSED"/>
+        </MicrophoneDynamicInfo>
+    </MicrophoneDynamicInfoList>
+</MicrophoneInfoAndDynamicInfo>
