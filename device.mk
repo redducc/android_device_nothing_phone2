@@ -202,6 +202,8 @@ PRODUCT_PACKAGES += \
     vendor.aospa.powershare-service
 
 # QTI Components
+TARGET_QTI_PERF_VARIANT := canoe
+
 TARGET_COMMON_QTI_COMPONENTS := \
     adreno \
     alarm \
