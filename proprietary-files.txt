@@ -685,12 +685,8 @@ vendor/bin/ssgtzd
 vendor/etc/init/ssgtzd.rc
 
 # Diag
-vendor/bin/diag-router
-vendor/etc/init/vendor.qti.diag.rc
-vendor/etc/vintf/manifest/vendor.qti.diag.hal.service.xml
 vendor/lib64/libdiagjni.so
 vendor/lib64/libqsocket.so
-vendor/lib64/vendor.qti.diaghal@1.0.so;MODULE_SUFFIX=_vendor
 
 # Display (Calibration Data)
 vendor/etc/display/qdcm_calib_data_nt37705_amoled_fhd+_120hz_cmd_mode_dsi_visionox_panel.json
@@ -709,15 +705,6 @@ vendor/etc/init/vendor.qti.hardware.dsp-service.rc|8cf97beaec8309796cf3003aed6e5
 vendor/etc/seccomp_policy/vendor.qti.hardware.dsp.policy|cacb134fab84cb55f607fcff11b80481e2a8114d
 vendor/etc/vintf/manifest/vendor.qti.hardware.dsp-service.xml|c02c767856a1e8ef25441f3e0243487ac3829367
 vendor/lib64/vendor.qti.hardware.dsp-V1-ndk.so|cdf78fd543aa541925a3a4232221bbe1ae0bcb74
-
-# ESE
-vendor/bin/hw/vendor.qti.esepowermanager@1.1-service
-vendor/etc/init/vendor.qti.esepowermanager@1.1-service.rc
-vendor/lib64/hw/vendor.qti.esepowermanager@1.1-impl.so
-vendor/lib64/libesepmconfig.so
-vendor/lib64/libesesbprovision.so
-vendor/lib64/vendor.qti.esepowermanager@1.0.so
-vendor/lib64/vendor.qti.esepowermanager@1.1.so
 
 # EVA
 vendor/etc/eva/facedetection/model3.dat
@@ -813,10 +800,8 @@ vendor/etc/izat.conf
 vendor/etc/lowi.conf
 vendor/etc/sap.conf
 vendor/etc/vintf/manifest/android.hardware.gnss-aidl-service-qti.xml
-vendor/etc/vintf/manifest/android.hardware.gnss@2.1-service-qti.xml
 vendor/etc/vintf/manifest/vendor.qti.gnss-service.xml
 vendor/etc/xtwifi.conf
-vendor/lib64/libcacertclient.so
 vendor/lib64/libdataitems.so
 vendor/lib64/libengineplugin.so
 vendor/lib64/libgarden.so
@@ -851,7 +836,6 @@ vendor/lib64/libxtadapter.so
 vendor/lib64/vendor.qti.gnss-V3-ndk_platform.so
 vendor/lib64/vendor.qti.gnss-V5-ndk_platform.so
 vendor/lib64/vendor.qti.gnss-service.so
-vendor/lib64/vendor.qti.hardware.cacert@1.0.so
 
 # Graphics (Adreno firmware)
 vendor/firmware/a610_zap.b00
@@ -945,7 +929,6 @@ vendor/lib64/libQnnHtp.so
 vendor/lib64/libQnnHtpV69Stub.so
 
 # Modem services
-vendor/app/CACertService/CACertService.apk
 vendor/bin/pd-mapper
 vendor/bin/qrtr-cfg
 vendor/bin/qrtr-lookup
@@ -992,18 +975,6 @@ vendor/lib64/vendor.qti.hardware.power.powermodule@1.0.so
 vendor/bin/hw/android.hardware.power.stats-service
 vendor/etc/init/power.stats.rc
 vendor/etc/vintf/manifest/power.stats.xml
-
-# QCC
-vendor/bin/qcc-trd
-vendor/etc/init/init.qdmastats.rc
-vendor/lib64/hw/vendor.qti.hardware.qccvndhal@1.0-impl.so
-vendor/lib64/libgrpc++_unsecure.so;MODULE_SUFFIX=_prebuilt
-vendor/lib64/libqcc_file_agent.so
-vendor/lib64/libqdma_file_agent.so
-vendor/lib64/vendor.qti.hardware.qccsyshal@1.0.so;MODULE_SUFFIX=_vendor
-vendor/lib64/vendor.qti.hardware.qccsyshal@1.1.so;MODULE_SUFFIX=_vendor
-vendor/lib64/vendor.qti.hardware.qccvndhal@1.0-halimpl.so
-vendor/lib64/vendor.qti.hardware.qccvndhal@1.0.so;MODULE_SUFFIX=_vendor
 
 # QCV
 vendor/bin/init.qti.qcv.sh
@@ -1315,13 +1286,10 @@ vendor/etc/wifi/wpa_supplicant_overlay.conf
 
 # WiFi Display
 vendor/bin/wfdvndservice
-vendor/bin/wifidisplayhalservice
-vendor/etc/init/com.qualcomm.qti.wifidisplayhal@1.0-service.rc
 vendor/etc/init/wfdvndservice.rc
 vendor/etc/seccomp_policy/wfdvndservice.policy
 vendor/etc/seccomp_policy/wifidisplayhalservice.policy
 vendor/etc/wfdconfig.xml
-vendor/lib64/hw/vendor.qti.hardware.wifidisplaysession@1.0-impl.so
 vendor/lib64/libFileMux_proprietary.so
 vendor/lib64/libmmrtpdecoder_vendor.so
 vendor/lib64/libmmrtpencoder_vendor.so
@@ -1336,7 +1304,6 @@ vendor/lib64/libwfdmmservice_proprietary.so
 vendor/lib64/libwfdmmsrc_proprietary.so
 vendor/lib64/libwfdmodulehdcpsession.so
 vendor/lib64/libwfdrtsp_vendor.so
-vendor/lib64/libwfdsessionmodule.so
 vendor/lib64/libwfdsourcesession_proprietary.so
 vendor/lib64/libwfdsourcesm_proprietary.so
 vendor/lib64/libwfduibcinterface_vendor.so
@@ -1345,11 +1312,16 @@ vendor/lib64/libwfduibcsinkinterface_vendor.so
 vendor/lib64/libwfduibcsrc_vendor.so
 vendor/lib64/libwfduibcsrcinterface_vendor.so
 vendor/lib64/libwfdutils_proprietary.so
-vendor/lib64/vendor.qti.hardware.wifidisplaysession@1.0.so;MODULE_SUFFIX=_vendor
-vendor/lib64/vendor.qti.hardware.wifidisplaysessionl@1.0-halimpl.so
 
 # Bluetooth - from Nothing Phone (3) Metroid C5.0-260819-1642
 vendor/lib64/vendor.qti.hardware.bttpi-V3-ndk.so|44f7ae3ea60d8e8bb0a8905eb3901ca02bd3e9c7
+
+# CA Cert - from Nothing Phone (3) Metroid C5.0-260819-1642
+vendor/app/CACertService/CACertService.apk|78b9394c3ab091c299d6a10687b324dacb499632
+vendor/etc/sysconfig/cacert-oem-defined-uids.xml|da4297f531ec44c3a4b094d0eb3e1638a4d68d3a
+vendor/etc/vintf/manifest/cacert-saidl.xml|af590798b4f52238fb81ce2d14ef1a7b0546b6d3
+vendor/lib64/libcacertclient.so|f1ec91e26c8b063a9128579d2b768c212a551ff5
+vendor/lib64/vendor.qti.hardware.cacertaidlservice-V1-ndk.so;MODULE_SUFFIX=_vendor|0a7fe2739f80311a6df89c74d9957643893e1ae0
 
 # CNE - from Nothing Phone (3) Metroid C5.0-260819-1642
 vendor/app/CneApp/CneApp.apk|c5e889119f6dd4bc71939d4bd2fe8b67e1bdfee7
@@ -1474,7 +1446,11 @@ vendor/lib64/vendor.qti.hardware.data.lceaidlservice-V1-ndk.so;MODULE_SUFFIX=_ve
 vendor/lib64/vendor.qti.hardware.data.qmiaidlservice-V1-ndk.so;MODULE_SUFFIX=_vendor|09a9269ae8a2ba4d9c414144dd2896d63592de5b
 
 # Diag - from Nothing Phone (3) Metroid C5.0-260819-1642
+vendor/bin/diag-router|8c9af32e8061ee121da999463f62f6ca47892a4e
+vendor/etc/init/vendor.qti.diag.rc|7fac6597717eea1008311ccfa01d25f93582ef5c
+vendor/etc/vintf/manifest/vendor.qti.diag.hal.service.xml|d57bc07d8907a15f9618266bdcd11e4b44b383f7
 vendor/lib64/libdiag.so|6fd67baa04c8f92e43b16be0b2199d574392f7d6
+vendor/lib64/vendor.qti.diaghal-V1-ndk.so;MODULE_SUFFIX=_vendor|975c02d72fb55bbed2f8d0fb7a9305e420f035b5
 
 # EMBMS - from Nothing Phone (3) Metroid C5.0-260819-1642
 vendor/bin/embmsslServer|66425a946f2a2eb469a892ebec1eae5f677b3dc1
@@ -1550,6 +1526,16 @@ vendor/etc/init/vendor.qti.hardware.qseecom@1.0-service.rc|62999151efe98f6add66e
 vendor/etc/vintf/manifest/vendor.qti.hardware.qseecom@1.0-service.xml|c6c3f9d2aff48547ca941f56100656d36aa09226
 vendor/lib64/hw/vendor.qti.hardware.qseecom@1.0-impl.so|659413fabd600d096efd84abd01ad0360c1b3177
 vendor/lib64/vendor.qti.hardware.qseecom-V1-ndk.so|d8d6a22165c06fb55cf0ede0856c6a00f507aacb
+
+# QCC - from Nothing Phone (3) Metroid C5.0-260819-1642
+vendor/bin/qcc-vendor|1c7f9026d06810d8082c6da08786d10901dae8cd
+vendor/etc/init/init.qccvendor.rc|aadd859671ffbf0806112f694b6a8d8aa8e8df59
+vendor/etc/vintf/manifest/vendor.qti.qccvndhal_aidl-service.xml|d92ff9bea5a3803104272924440bfe98fa4a4a9f
+vendor/lib64/libqcc_file_agent.so|5588c847621582593cb8b2e7dbaa6594641b145f
+vendor/lib64/libqcc_sdk.so|c577dabe673c36206164158b064986baff688d87
+vendor/lib64/vendor.qti.qccvndhal_aidl-halimpl.so|de7d947a44deb3f0f42b101543e68e1c8d4f2efd
+vendor/lib64/vendor.qti.qccsyshal_aidl-V1-ndk.so;MODULE_SUFFIX=_vendor|224b847af379ca5bebab22da75a222a47b567855
+vendor/lib64/vendor.qti.qccvndhal_aidl-V1-ndk.so;MODULE_SUFFIX=_vendor|ef28b1461f084020c6abeb0192f31c63511bfa27
 
 # QESDK - from Nothing Phone (3) Metroid C5.0-260819-1642
 vendor/lib64/libqesdk2_0.so|defc61b1d23b923f4db0990319c76001cf373249
@@ -1738,10 +1724,16 @@ vendor/apex/com.google.android.widevine-12498615.apex|a35909bef639876b14831459bf
 vendor/lib64/liboemcrypto.so|ef48b52894619325b1c3a7fb3613cb65577c2d5e
 
 # WiFi Display - from Nothing Phone (3) Metroid C5.0-260819-1642
+vendor/bin/wifidisplayhalservice|ef90045b5b27e9f994845b5b762335065d4741af
+vendor/etc/init/com.qualcomm.qti.wifidisplayhal@1.0-service.rc|576ce4393b7746b77a230745aa9e9ee3bd31b17d
 vendor/bin/wfdhdcphalservice|6214f17ae418caadde945e11f35aa75cb74b9189
 vendor/etc/init/android.hardware.drm@1.1-service.wfdhdcp.rc|c266f08783a17f6583e3f22c85e55b0c200442ea
 vendor/etc/seccomp_policy/wfdhdcphalservice.policy|7954944c06f9fdbd5c57d00707323ecd769b1d09
 vendor/etc/vintf/manifest/android.hardware.drm-service.xml|fb563f54e0c209c0133aae67beccd8ba6d263f01
+vendor/etc/vintf/manifest/vendor.qti.hardware.wifidisplaysession-service.xml|d9bce16f45874f66ebeebe4a4269685a5fc2cb6d
+vendor/lib64/libwfdsessionmodule.so|edeca05eba7c4c09118e4df3ff90d59a4dbbf9c0
+vendor/lib64/vendor.qti.hardware.wifidisplaysession_aidl-V1-ndk.so|1003c19ff8714d5502c32e4ca367f7f4ceceb42a
+vendor/lib64/vendor.qti.hardware.wifidisplaysessionl@1.0-halimpl.so|4625ab0a90eb4d556c1339b7066d0cf2977e62ab
 
 # Display (configs) - from PDX257 ELBE-1.1.0-REL-260522-1202
 vendor/etc/display/DPU8__.xml|959399651711302788debc5fbf2ac9ea814e6b68
