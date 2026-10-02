@@ -1700,6 +1700,12 @@ vendor/lib64/libminksocket_vendor.so|82d978e9460791a2bb23f516c1a90118aef287aa
 vendor/lib64/libqcbor.so|759e1bd0453f106ed72274e062dccb33bca6ddd6
 vendor/lib64/vendor.qti.hardware.minkipcbinder-V1-ndk.so;MODULE_SUFFIX=_vendor|f2e238c0404557761c17ad65bb60d9b680a37ba2
 
+# Snapdragon services - from Nothing Phone (3) Metroid C5.0-260819-1642
+vendor/bin/snapdragon_services|1e217ab88bbe878bd8e0fe53d64958e2c83f9922
+vendor/etc/init/snapdragon_services.rc|c7e2edf91f0a2b4f8f7021dc8e4ead4acbd68635
+vendor/etc/vintf/manifest/snapdragon_services.xml|7cc9d53ba93adf641dc96983c6fb4315a7eb5077
+vendor/lib64/vendor.qti.snapdragonServices-V1-ndk.so|2bbde9605ebb5b85a4064a0881d66837c185c1ce
+
 # Time Services - from Nothing Phone (3) Metroid C5.0-260819-1642
 vendor/lib64/libtime_genoff.so|3f571c060938e00380f83a717c90689f2a5ac6d5
 
