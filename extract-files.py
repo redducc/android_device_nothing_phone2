@@ -141,6 +141,20 @@ lib_fixups: lib_fixups_user_type = {
 }
 
 blob_fixups: blob_fixups_user_type = {
+    (
+        'vendor/bin/sensors.qti',
+        'vendor/lib64/libsns_direct_channel_stub.so',
+        'vendor/lib64/libsnsdiaglog.so',
+        'vendor/lib64/libssc.so',
+        'vendor/lib64/sensors.ssc.so',
+    ): blob_fixup()
+        .replace_needed('libprotobuf-cpp-lite-21.7.so', 'libprotobuf-cpp-lite-21.12.so')
+        .replace_needed('libsnsapi.so', 'libsnsapi_v2.so'),
+    'vendor/lib64/libsnsapi_v2.so': blob_fixup()
+        .replace_needed('libprotobuf-cpp-lite-21.7.so', 'libprotobuf-cpp-lite-21.12.so')
+        .fix_soname(),
+    'vendor/bin/slim_daemon': blob_fixup()
+        .replace_needed('libsnsapi.so', 'libsnsapi_v2.so'),
     'system_ext/etc/seccomp_policy/perfservice.policy': blob_fixup()
         .add_line_if_missing('lseek: 1'),
     'vendor/etc/seccomp_policy/qcrilnr@2.0.policy': blob_fixup()

@@ -955,33 +955,30 @@ vendor/lib64/libscveObjectTracker.so
 vendor/lib64/libscveObjectTracker_stub.so
 
 # Sensors
-vendor/bin/hw/vendor.qti.hardware.sensorscalibrate@1.0-service
 vendor/bin/init.qcom.sensors.sh
-vendor/bin/sensors.qti
 vendor/etc/init/init.vendor.sensors.rc
-vendor/etc/init/vendor.qti.hardware.sensorscalibrate@1.0-service.rc
 vendor/etc/init/vendor.sensors.qti.rc
-vendor/etc/permissions/vendor-qti-hardware-sensorscalibrate.xml
-vendor/lib64/hw/vendor.qti.hardware.sensorscalibrate@1.0-impl.so
 vendor/lib64/libsensor_calibration.so
-vendor/lib64/libsensorcal.so
 vendor/lib64/libsensorslog.so
 vendor/lib64/libsns_api.so
 vendor/lib64/libsns_device_mode_stub.so
-vendor/lib64/libsns_direct_channel_stub.so
 vendor/lib64/libsns_registry_skel.so
 vendor/lib64/libsnsapi-full.so
 vendor/lib64/libsnsapi.so
-vendor/lib64/libsnsdiaglog.so
-vendor/lib64/libssc.so
-vendor/lib64/sensors.ssc.so
-vendor/lib64/vendor.qti.hardware.sensorscalibrate@1.0.so
 
 # SDSP - from PDX257 ELBE-1.1.0-REL-260522-1202
 vendor/bin/sscrpcd|b11e792503ec30b0cc64cd752b78ce211d1f323d
 vendor/etc/init/vendor.sensors.sscrpcd.rc|df52901f1ad0fbc97d6070e28896a6be40154814
 vendor/lib64/libsdsprpc.so|f7b35ea78045cc2b864a60fdd0c368b41faec930
 vendor/lib64/libssc_default_listener.so|7f6e23e755e34441606172c9cac1358996fecdea
+
+# Sensors - from OSOM Ingot UKQ1.240227.165
+vendor/bin/sensors.qti|d260d24128dea497d9087b98cb13e654426aa49c|2b895dcc1c0801c312735df596540115373c0d0a
+vendor/lib64/libsns_direct_channel_stub.so|197cf26b65fb35cb8a1727d23b5b7c525b52e001
+vendor/lib64/libsnsapi.so:vendor/lib64/libsnsapi_v2.so|0047efb7b25d0de49e4cc861ef64c36cba338aa8|7c828ee5cf69a8eded78aec17c400956663a4198
+vendor/lib64/libsnsdiaglog.so|6073b5ab0a4e81600004afae98093bfd2a10b204|f0f92ef395743e07daf73bbe613b2634b8aaaf95
+vendor/lib64/libssc.so|9b1a6ec280390350c8cc6630bc918377355807cc|6335b50092bb8ce4d8b379c483104e28e9bd53d8
+vendor/lib64/sensors.ssc.so|51f7cc19d5498d8999833c504658c02667397625|0d5ccde68509978f74aa12826850dcb4b7f594c7
 
 # Sensors (config)
 vendor/etc/sar/sarconfig.json
@@ -1411,6 +1408,7 @@ vendor/bin/loc_launcher|0c679e6a852be79163a434dc37f7838c90d3462e
 vendor/bin/lowi-server;DISABLE_CHECKELF|df08fc975c194b78470f5aa4a78a9bb5cc043b16
 vendor/bin/mlid|c52041452d1e923f0edbe57e44b8bb4877a3b371
 vendor/bin/qwes_cli|2f860d34e2a602a18524e0c56be7641504bf44db
+vendor/bin/slim_daemon|9a53451d63ced8ee018ee94f968c5469967db7da|71e3bc097ffb9896c93c1906d0419e3c3875b472
 vendor/bin/xtra-daemon|b9336d909933b38b06743ce60e5370c4c8662380
 vendor/bin/xtwifi-client|721d833f56cbf295b365120fbadcf697e83f7bad
 vendor/etc/apdr.conf|09909ef547ca1f0fe59608850cf1481714c56433

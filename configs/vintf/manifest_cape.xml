@@ -9,16 +9,6 @@
         <fqname>ISecureElement/SIM1</fqname>
         <fqname>ISecureElement/SIM2</fqname>
     </hal>
-    <!-- SensorCal HAL service -->
-    <hal format="hidl">
-        <name>vendor.qti.hardware.sensorscalibrate</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>ISensorsCalibrate</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
     <!-- Camera PostProcessing service -->
     <hal format="hidl">
         <name>vendor.qti.hardware.camera.postproc</name>
