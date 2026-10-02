@@ -336,7 +336,11 @@ void Session::notify(const fingerprint_msg_t* msg) {
             AcquiredInfo result =
                     VendorAcquiredFilter(msg->data.acquired.acquired_info, &vendorCode);
             ALOGD("onAcquired(%hhd, %d)", result, vendorCode);
-            mCb->onAcquired(result, vendorCode);
+            // Goodix reports finger down/up as vendor codes, which would make
+            // SystemUI drop the UDFPS illumination mid-capture.
+            if (result != AcquiredInfo::VENDOR) {
+                mCb->onAcquired(result, vendorCode);
+            }
         } break;
         case FINGERPRINT_TEMPLATE_ENROLLING: {
             ALOGD("onEnrollResult(fid=%d, gid=%d, rem=%d)", msg->data.enroll.finger.fid,
