@@ -802,11 +802,6 @@ vendor/etc/init/init.qti.fm.rc
 vendor/etc/init.qti.fm.sh
 vendor/lib64/ftm_fm_lib.so
 
-# Gatekeeper
-vendor/bin/hw/android.hardware.gatekeeper@1.0-service-qti
-vendor/etc/init/android.hardware.gatekeeper@1.0-service-qti.rc
-vendor/lib64/hw/android.hardware.gatekeeper@1.0-impl-qti.so
-
 # GNSS
 vendor/bin/edgnss-daemon
 vendor/bin/engine-service
@@ -1542,6 +1537,11 @@ vendor/etc/init/init.embmssl_server.rc|b4111eadbf3cc24fd1b3daed58835576053bc3dd
 vendor/etc/vintf/manifest/vendor.qti.hardware.embmssl.xml|598eed63d31234cd90a653e74358bb06437a6304
 vendor/lib64/libembmsservice.so|30ab5bc86b1f3a8524c48fbe7aa703cbcb6e3f05
 vendor/lib64/vendor.qti.hardware.embmsslaidl-V2-ndk.so;MODULE_SUFFIX=_vendor|00ab56b195134fa53e339f9d6ccf2dee6c710803
+
+# Gatekeeper - from Nothing Phone (3) Metroid C5.0-260819-1642
+vendor/bin/hw/android.hardware.gatekeeper-service-qti|50c63b7bbc67973f0f95244e44365f22edcaa5e4
+vendor/etc/init/android.hardware.gatekeeper-service-qti.rc|ca6d70f6e04cebf079d254b31750e9da9f663bdf
+vendor/lib64/hw/libqtigatekeeper.so|a824b4a12444307bb98846f5c36813e42f37788f
 
 # IMS - from Nothing Phone (3) Metroid C5.0-260819-1642
 vendor/bin/ims-dataservice-daemon|f8ea51c88cd9656315b00cb31d4e54f43d3cb752
