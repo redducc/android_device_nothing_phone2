@@ -203,13 +203,17 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/etc/init/vendor.noth.hardware.camera-service.rc': (
         blob_fixup().regex_replace(r'\bNtCamAlgoCapacity\b', 'CameraServiceCapacity')
     ),
-    (
-        'vendor/lib64/libntofflinepostproc.so',
-        'vendor/lib64/vendor.qti.hardware.camera.postproc@1.0-service-impl.so',
-    ): blob_fixup().replace_needed(
-        'vendor.qti.hardware.camera.postproc@1.0.so',
-        'vendor.qti.hardware.camera.postproc@1.0-nothing.so',
-    ),
+    'vendor/lib64/libntofflinepostproc.so': blob_fixup()
+        .replace_needed('vendor.qti.hardware.camera.postproc@1.0.so', 'vendor.qti.hardware.camera.postproc@1.0-nothing.so')
+        .add_needed('libcamhidl_shim.so')
+        .binary_regex_replace(b'16IPostProcService10getService', b'16IPostProcService10getShimSvc'),
+    'vendor/lib64/vendor.qti.hardware.camera.postproc@1.0-service-impl.so': blob_fixup()
+        .replace_needed('vendor.qti.hardware.camera.postproc@1.0.so', 'vendor.qti.hardware.camera.postproc@1.0-nothing.so')
+        .add_needed('libcamhidl_shim.so')
+        .binary_regex_replace(b'16IPostProcService17registerAsService', b'16IPostProcService17registerAsShimSvc'),
+    'vendor/lib64/vendor.qti.hardware.camera.aon@1.0-service-impl.so': blob_fixup()
+        .add_needed('libcamhidl_shim.so')
+        .binary_regex_replace(b'11IAONService17registerAsService', b'11IAONService17registerAsShimSvc'),
 }  # fmt: skip
 
 module = ExtractUtilsModule(

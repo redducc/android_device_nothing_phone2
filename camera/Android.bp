@@ -9,3 +9,13 @@ cc_library_shared {
     shared_libs: ["libui"],
     vendor: true,
 }
+
+cc_library_shared {
+    name: "libcamhidl_shim",
+    srcs: ["camhidl_shim.cpp"],
+    shared_libs: [
+        "libhidlbase",
+        "libutils",
+    ],
+    vendor: true,
+}
