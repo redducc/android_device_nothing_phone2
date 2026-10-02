@@ -971,11 +971,6 @@ vendor/etc/pwr/VideoPowerOptFeature.xml
 vendor/lib64/libvendorscenariopoweroptfeature.so
 vendor/lib64/vendor.qti.hardware.power.powermodule@1.0.so
 
-# Powerstats
-vendor/bin/hw/android.hardware.power.stats-service
-vendor/etc/init/power.stats.rc
-vendor/etc/vintf/manifest/power.stats.xml
-
 # QCV
 vendor/bin/init.qti.qcv.sh
 vendor/etc/init/init.qti.qcv.rc
@@ -1527,6 +1522,11 @@ vendor/etc/init/vendor.qti.hardware.qseecom@1.0-service.rc|62999151efe98f6add66e
 vendor/etc/vintf/manifest/vendor.qti.hardware.qseecom@1.0-service.xml|c6c3f9d2aff48547ca941f56100656d36aa09226
 vendor/lib64/hw/vendor.qti.hardware.qseecom@1.0-impl.so|659413fabd600d096efd84abd01ad0360c1b3177
 vendor/lib64/vendor.qti.hardware.qseecom-V1-ndk.so|d8d6a22165c06fb55cf0ede0856c6a00f507aacb
+
+# Powerstats - from Nothing Phone (3) Metroid C5.0-260819-1642
+vendor/bin/hw/android.hardware.power.stats-service|18d9fe805d5a283cf52bbe1b30e396112a88f253
+vendor/etc/init/power.stats.rc|a3bf823712175fc4b42823a8b483f0c5a651648c
+vendor/etc/vintf/manifest/power.stats.xml|e11a3d364a6f7b12d89582bc0022dac1a3738e13
 
 # QCC - from Nothing Phone (3) Metroid C5.0-260819-1642
 vendor/bin/qcc-vendor|1c7f9026d06810d8082c6da08786d10901dae8cd

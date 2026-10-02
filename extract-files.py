@@ -145,8 +145,6 @@ blob_fixups: blob_fixups_user_type = {
         .add_line_if_missing('uname: 1'),
     'vendor/etc/audio/sku_cape/resourcemanager_waipio_qrd.xml': blob_fixup()
         .regex_replace('<speaker_protection_enabled>1<', '<speaker_protection_enabled>0<'),
-    'vendor/bin/hw/android.hardware.power.stats-service': blob_fixup()
-        .replace_needed('android.hardware.power.stats-V1-ndk_platform.so', 'android.hardware.power.stats-V1-ndk.so'),
     ('vendor/bin/hw/android.hardware.security.keymint-service-qti', 'vendor/lib64/libqtikeymint.so'): blob_fixup()
         .replace_needed('android.hardware.security.keymint-V1-ndk_platform.so', 'android.hardware.security.keymint-V1-ndk.so')
         .replace_needed('android.hardware.security.secureclock-V1-ndk_platform.so', 'android.hardware.security.secureclock-V1-ndk.so')
