@@ -1257,7 +1257,6 @@ vendor/bin/tftp_server
 vendor/etc/init/vendor.qti.tftp.rc
 
 # Thermal Engine
-vendor/bin/thermal-engine-v2
 vendor/etc/init/init_thermal-engine-v2.rc
 vendor/lib64/libthermalclient.so
 
@@ -1781,6 +1780,9 @@ vendor/lib64/vendor.qti.syshealthmon-V1-ndk.so|f50f0abb96da56cfc220c2681b28f22ab
 vendor/lib64/libminkdescriptor.so|5bc8543625eda05505ac569e071b722d4818a51c
 vendor/lib64/libminksocket_vendor.so|82d978e9460791a2bb23f516c1a90118aef287aa
 vendor/lib64/libqcbor.so|759e1bd0453f106ed72274e062dccb33bca6ddd6
+
+# Thermal Engine - from Nothing Phone (3) Metroid C5.0-260819-1642
+vendor/bin/thermal-engine-v2|b21ab1f41b7a11dc93615c84379b577d5be64ab5
 
 # Time Services - from Nothing Phone (3) Metroid C5.0-260819-1642
 vendor/lib64/libtime_genoff.so|3f571c060938e00380f83a717c90689f2a5ac6d5
