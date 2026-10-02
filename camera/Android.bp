@@ -14,10 +14,14 @@ cc_library_shared {
     name: "libcamhidl_shim",
     srcs: ["camhidl_shim.cpp"],
     local_include_dirs: ["include"],
+    include_dirs: [
+        "hardware/interfaces/camera/common/default/include",
+    ],
     shared_libs: [
         "android.hardware.graphics.mapper@4.0",
         "libbase",
         "libbinder_ndk",
+        "libcamera_metadata",
         "libcutils",
         "libhidlbase",
         "libutils",

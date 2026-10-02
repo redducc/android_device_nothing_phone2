@@ -11,8 +11,11 @@
 #include <aidlcommonsupport/NativeHandle.h>
 #include <android-base/logging.h>
 #include <android/binder_manager.h>
+#include <VendorTagDescriptor.h>
 #include <android/hardware/graphics/mapper/4.0/IMapper.h>
 #include <vendor/qti/hardware/camera/postproc/1.0/IPostProcService.h>
+
+#include <dlfcn.h>
 
 #include <mutex>
 #include <string>
@@ -420,4 +423,54 @@ sp<IMapper> getMapper(const std::string& name, bool getStub) __asm__(
 
 sp<IMapper> getMapper(const std::string& name, bool) {
     return IMapper::getService(name, true);
+}
+
+// NtCam reads vendor tags from the camera.common@1.0 helper globals, which the
+// HIDL vendor camera NDK used to set. The AIDL NDK sets the unversioned helper
+// globals instead; the classes are the same apart from the namespace, so
+// mirror them once the camera service connection is up.
+using android::hardware::camera::common::helper::VendorTagDescriptor;
+using android::hardware::camera::common::helper::VendorTagDescriptorCache;
+
+struct ACameraManager;
+struct ACameraIdList;
+using camera_status_t = int32_t;
+
+extern "C" camera_status_t ACameraManager_getCameraIdShim(ACameraManager* manager,
+                                                          ACameraIdList** cameraIdList) {
+    // Looked up at runtime so the camera provider, which also loads this
+    // library, doesn't pull in the vendor camera NDK.
+    static auto getCameraIdList =
+            reinterpret_cast<camera_status_t (*)(ACameraManager*, ACameraIdList**)>(
+                    dlsym(RTLD_DEFAULT, "ACameraManager_getCameraIdList"));
+    camera_status_t ret = getCameraIdList(manager, cameraIdList);
+
+    static std::once_flag once;
+    std::call_once(once, [] {
+        auto getCache = reinterpret_cast<sp<VendorTagDescriptorCache> (*)()>(dlsym(
+                RTLD_DEFAULT,
+                "_ZN7android8hardware6camera6common6helper24VendorTagDescriptorCache"
+                "23getGlobalVendorTagCacheEv"));
+        auto setCache = reinterpret_cast<status_t (*)(const sp<VendorTagDescriptorCache>&)>(dlsym(
+                RTLD_DEFAULT,
+                "_ZN7android8hardware6camera6common4V1_06helper24VendorTagDescriptorCache"
+                "25setAsGlobalVendorTagCacheERKNS_2spIS5_EE"));
+        auto getDesc = reinterpret_cast<sp<VendorTagDescriptor> (*)()>(dlsym(
+                RTLD_DEFAULT,
+                "_ZN7android8hardware6camera6common6helper19VendorTagDescriptor"
+                "28getGlobalVendorTagDescriptorEv"));
+        auto setDesc = reinterpret_cast<status_t (*)(const sp<VendorTagDescriptor>&)>(dlsym(
+                RTLD_DEFAULT,
+                "_ZN7android8hardware6camera6common4V1_06helper19VendorTagDescriptor"
+                "30setAsGlobalVendorTagDescriptorERKNS_2spIS5_EE"));
+        if (!getCache || !setCache || !getDesc || !setDesc) {
+            LOG(ERROR) << "Vendor tag helper symbols not found";
+            return;
+        }
+
+        if (sp<VendorTagDescriptorCache> cache = getCache()) setCache(cache);
+        if (sp<VendorTagDescriptor> desc = getDesc()) setDesc(desc);
+        LOG(INFO) << "Mirrored vendor tag globals";
+    });
+    return ret;
 }
