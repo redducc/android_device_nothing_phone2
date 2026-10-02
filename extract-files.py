@@ -175,6 +175,11 @@ blob_fixups: blob_fixups_user_type = {
             b'_ZN7android19GraphicBufferMapper12importBufferEPK13native_handlejjjimjPS3_',
             b'_ZN7android19GraphicBufferMapper12importBuffeREPK13native_handlejjjimjPS3_',
         ),
+    'vendor/bin/thermal-engine-v2': blob_fixup()
+        .binary_regex_replace(
+            b'/topology/physical_package_id',
+            b'/topology/cluster_id\x00\x00\x00\x00\x00\x00\x00\x00\x00',
+        ),
     'vendor/etc/init/vendor.noth.hardware.camera-service.rc': (
         blob_fixup().regex_replace(r'\bNtCamAlgoCapacity\b', 'CameraServiceCapacity')
     ),
