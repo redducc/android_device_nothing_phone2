@@ -176,6 +176,10 @@ DEVICE_MANIFEST_FILE += \
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/configs/media/init.qti.media.sh:$(TARGET_COPY_OUT_VENDOR)/bin/init.qti.media.sh
 
+# Linker
+PRODUCT_VENDOR_LINKER_CONFIG_FRAGMENTS += \
+    $(DEVICE_PATH)/configs/linker.config.json
+
 # NFC
 PRODUCT_PACKAGES += \
     android.hardware.nfc2-service.nxp \
