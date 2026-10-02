@@ -977,18 +977,12 @@ vendor/lib64/libqmi_client_qmux.so
 # NFC
 system/etc/permissions/com.nxp.nfc.xml
 system/framework/com.nxp.nfc.jar
-vendor/bin/hw/android.hardware.nfc_snxxx@1.2-service
-vendor/etc/init/android.hardware.nfc_snxxx@1.2-service.rc
 vendor/etc/init/init.Pong.nfc.rc
 vendor/etc/init/init.Pong.se.rc
 vendor/etc/permissions/com.nxp.nfc.xml
 vendor/etc/libnfc-nci.conf
 vendor/etc/libnfc-nxp.conf
-vendor/lib64/jcos_client.so
 vendor/lib64/libpn560_fw.so
-vendor/lib64/ls_client.so
-vendor/lib64/nfc_nci_nxp_snxxx.so
-vendor/lib64/se_extn_client.so
 vendor/libnfc-nxp_RF.conf
 
 # NTF
