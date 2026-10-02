@@ -1,1 +1,2 @@
 vendor.noth.hardware.camera.INtCamService/default                                    u:object_r:vendor_hal_noth_camera_service:s0
+vendor.qti.hardware.camera.postproc.IPostProcService/camerapostprocservice            u:object_r:vendor_hal_camera_postproc_service:s0

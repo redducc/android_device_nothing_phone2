@@ -13,9 +13,17 @@ cc_library_shared {
 cc_library_shared {
     name: "libcamhidl_shim",
     srcs: ["camhidl_shim.cpp"],
+    local_include_dirs: ["include"],
     shared_libs: [
+        "android.hardware.graphics.mapper@4.0",
+        "libbase",
+        "libbinder_ndk",
+        "libcutils",
         "libhidlbase",
         "libutils",
+        "vendor.qti.hardware.camera.postproc-V2-ndk",
+        "vendor.qti.hardware.camera.postproc@1.0-nothing",
     ],
+    static_libs: ["libaidlcommonsupport"],
     vendor: true,
 }

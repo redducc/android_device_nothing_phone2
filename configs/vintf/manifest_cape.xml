@@ -9,15 +9,10 @@
         <fqname>ISecureElement/SIM1</fqname>
         <fqname>ISecureElement/SIM2</fqname>
     </hal>
-    <!-- Camera PostProcessing service -->
-    <hal format="hidl">
+    <hal format="aidl">
         <name>vendor.qti.hardware.camera.postproc</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IPostProcService</name>
-            <instance>camerapostprocservice</instance>
-        </interface>
+        <version>2</version>
+        <fqname>IPostProcService/camerapostprocservice</fqname>
     </hal>
     <hal format="aidl">
         <name>android.hardware.audio.core</name>
