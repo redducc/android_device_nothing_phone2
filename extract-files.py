@@ -107,6 +107,7 @@ lib_fixups: lib_fixups_user_type = {
         'vendor.qti.ims.rcsuce@*',
         'vendor.qti.ims.rcsuceaidlservice-V1-ndk',
         'vendor.qti.ims.uceaidlservice-V1-ndk',
+        'vendor.qti.hardware.minkipcbinder-V1-ndk',
         'vendor.qti.imsrtpservice@3.0',
         'vendor.qti.latency@*',
         'vendor.display.color@1.0',

@@ -1018,12 +1018,9 @@ vendor/lib64/vendor.qti.qesdhal@1.1-impl.so
 vendor/lib64/vendor.qti.qesdsys-V1-ndk_platform.so
 
 # QSEECOM
-vendor/bin/hw/vendor.qti.hardware.qseecom@1.0-service
 vendor/bin/qseecomd
 vendor/etc/init/qseecomd.rc
-vendor/etc/init/vendor.qti.hardware.qseecom@1.0-service.rc
 vendor/etc/gpfspath_oem_config.xml
-vendor/lib64/hw/vendor.qti.hardware.qseecom@1.0-impl.so
 vendor/lib64/libGPreqcancel.so
 vendor/lib64/libGPreqcancel_svc.so
 vendor/lib64/libQSEEComAPI.so
@@ -1035,7 +1032,6 @@ vendor/lib64/librpmb.so
 vendor/lib64/libspl.so
 vendor/lib64/libssd.so
 vendor/lib64/libtzdrmgenprov.so
-vendor/lib64/vendor.qti.hardware.qseecom@1.0.so
 
 # RemoteFS
 vendor/bin/rmt_storage
@@ -1242,16 +1238,6 @@ vendor/etc/init/init.time_daemon.rc
 
 # Touchscreen (firmware)
 vendor/firmware/novatek_spi_fw.bin
-
-# Trusted Execution Environment connector
-vendor/bin/hw/vendor.qti.hardware.qteeconnector@1.0-service
-vendor/etc/init/vendor.qti.hardware.qteeconnector@1.0-service.rc
-vendor/lib64/hw/vendor.qti.hardware.qteeconnector@1.0-impl.so
-vendor/lib64/libGPQTEEC_vendor.so
-vendor/lib64/libGPTEE_vendor.so
-vendor/lib64/libQTEEConnector_listener.so
-vendor/lib64/libQTEEConnector_vendor.so
-vendor/lib64/vendor.qti.hardware.qteeconnector@1.0.so
 
 # Vibrator
 odm/etc/aac_richtap.config
@@ -1565,6 +1551,13 @@ vendor/lib64/vendor.qti.ims.uceaidlservice-V1-ndk.so;MODULE_SUFFIX=_vendor|83e0e
 # Peripheral Manager - from Nothing Phone (3) Metroid C5.0-260819-1642
 vendor/lib64/libperipheral_client.so|543651f56f2b975c2ff2a36ab0003d9bd163f3fb
 
+# QSEECOM - from Nothing Phone (3) Metroid C5.0-260819-1642
+vendor/bin/hw/vendor.qti.hardware.qseecom@1.0-service|5b3920d74fc49cb9d3f4dbdf6573a86133e58e19
+vendor/etc/init/vendor.qti.hardware.qseecom@1.0-service.rc|62999151efe98f6add66e748c8d5558994cef1b8
+vendor/etc/vintf/manifest/vendor.qti.hardware.qseecom@1.0-service.xml|c6c3f9d2aff48547ca941f56100656d36aa09226
+vendor/lib64/hw/vendor.qti.hardware.qseecom@1.0-impl.so|659413fabd600d096efd84abd01ad0360c1b3177
+vendor/lib64/vendor.qti.hardware.qseecom-V1-ndk.so|d8d6a22165c06fb55cf0ede0856c6a00f507aacb
+
 # QESDK - from Nothing Phone (3) Metroid C5.0-260819-1642
 vendor/lib64/libqesdk2_0.so|defc61b1d23b923f4db0990319c76001cf373249
 vendor/lib64/vendor.qti.qesdhal@1.0.so|1729448072110a814cee91835edb5b9117e42f82
@@ -1735,9 +1728,14 @@ vendor/lib64/vendor.qti.hardware.radio.uim_remote_server@1.0.so;MODULE_SUFFIX=_v
 vendor/lib64/vendor.qti.syshealthmon-V1-ndk.so|f50f0abb96da56cfc220c2681b28f22ab912a95a
 
 # SMC Invoke - from Nothing Phone (3) Metroid C5.0-260819-1642
+vendor/bin/hw/vendor.qti.hardware.minkipcbinder@1.0-service|ca525a49359c7bb6c2ba368e3195bafd9bb0d659
+vendor/etc/init/vendor.qti.hardware.minkipcbinder@1.0-service.rc|6e78beaed7c1de2503fac945779f49cf15b4ea12
+vendor/etc/vintf/manifest/vendor.qti.hardware.minkipcbinder-service.xml|8a5bd3223463b5dfcf6baf1cf6fa936565302fff
+vendor/lib64/libminkipcbinder_vendor.so|0796d8854268dd65cffa96a31b7435ef8a5416f6
 vendor/lib64/libminkdescriptor.so|5bc8543625eda05505ac569e071b722d4818a51c
 vendor/lib64/libminksocket_vendor.so|82d978e9460791a2bb23f516c1a90118aef287aa
 vendor/lib64/libqcbor.so|759e1bd0453f106ed72274e062dccb33bca6ddd6
+vendor/lib64/vendor.qti.hardware.minkipcbinder-V1-ndk.so;MODULE_SUFFIX=_vendor|f2e238c0404557761c17ad65bb60d9b680a37ba2
 
 # Time Services - from Nothing Phone (3) Metroid C5.0-260819-1642
 vendor/lib64/libtime_genoff.so|3f571c060938e00380f83a717c90689f2a5ac6d5
