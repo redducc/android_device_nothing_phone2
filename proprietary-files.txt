@@ -1321,6 +1321,7 @@ vendor/app/CACertService/CACertService.apk|78b9394c3ab091c299d6a10687b324dacb499
 vendor/etc/sysconfig/cacert-oem-defined-uids.xml|da4297f531ec44c3a4b094d0eb3e1638a4d68d3a
 vendor/etc/vintf/manifest/cacert-saidl.xml|af590798b4f52238fb81ce2d14ef1a7b0546b6d3
 vendor/lib64/libcacertclient.so|f1ec91e26c8b063a9128579d2b768c212a551ff5
+vendor/lib64/libjnihelper.so|89bf97cbb1c30af7b091674f5bbfc65b345af85b
 vendor/lib64/vendor.qti.hardware.cacertaidlservice-V1-ndk.so;MODULE_SUFFIX=_vendor|0a7fe2739f80311a6df89c74d9957643893e1ae0
 
 # CNE - from Nothing Phone (3) Metroid C5.0-260819-1642
