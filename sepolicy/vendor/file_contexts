@@ -75,3 +75,6 @@
 # Nothing Feature Service
 /vendor/bin/ntf-service                                                                            u:object_r:ntf_exec:s0
 /dev/ntfeature                                                                                     u:object_r:ntf_file:s0
+
+# UFS LUN read-ahead, tuned by init.kernel.post_boot-memory.sh
+/sys/devices/platform/soc/1d84000\.ufshc/host0/target0:0:0/0:0:0:[0-9]+/block/sd[a-z]+/queue/read_ahead_kb    u:object_r:vendor_sysfs_sd:s0
