@@ -1,15 +1,5 @@
 <manifest version="4.0" type="device" target-level="6">
     <kernel target-level="6"/>
-    <!-- CapabilityConfigStore HAL Service  -->
-    <hal format="hidl">
-        <name>vendor.qti.hardware.capabilityconfigstore</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>ICapabilityConfigStore</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
     <!-- DSP Service -->
     <!-- WFD HAL Service -->
     <hal format="hidl" optional="true">

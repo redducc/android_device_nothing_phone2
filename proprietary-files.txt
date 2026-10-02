@@ -679,11 +679,6 @@ vendor/lib64/libfastcvopt.so|6dee3ab1ed787a83200983354b860b512c799a88
 # Charger
 vendor/etc/charger_fw_fstab.qti
 
-# Configstore
-vendor/bin/hw/vendor.qti.hardware.capabilityconfigstore@1.0-service
-vendor/etc/init/vendor.qti.hardware.capabilityconfigstore@1.0-service.rc
-vendor/lib64/hw/vendor.qti.hardware.capabilityconfigstore@1.0-impl.so
-
 # Connection Security
 vendor/bin/ssgqmigd64
 vendor/bin/ssgtzd
@@ -1486,6 +1481,13 @@ vendor/lib64/vendor.qti.latency@2.0.so;MODULE_SUFFIX=_vendor|024e96694ccc2d3c378
 vendor/lib64/vendor.qti.latency@2.1.so;MODULE_SUFFIX=_vendor|9cab33eb4f47389a6cb6b8fbd54ae71f96f9cbee
 vendor/lib64/vendor.qti.latency@2.2.so;MODULE_SUFFIX=_vendor|87e5e0d143d13f3d3870d611075b09bc4a9eb093
 vendor/lib64/vendor.qti.latencyaidlservice-V1-ndk.so;MODULE_SUFFIX=_vendor|263f3324b11776613bf357ee4b31c0ba6eaf1f63
+
+# Configstore - from Nothing Phone (3) Metroid C5.0-260819-1642
+vendor/bin/hw/vendor.qti.hardware.capabilityconfigstore-service|170a6e0d8c5e8a21582b5cf508b53c6c9989eb37
+vendor/etc/init/vendor.qti.hardware.capabilityconfigstore-service.rc|cdf8b2ff791a3c4720d3034d8774aa63f91454e3
+vendor/etc/vintf/manifest/vendor.qti.hardware.capabilityconfigstore-service.xml|9674508adcecb50eff7875bb2cdf77d30539dd01
+vendor/lib64/hw/vendor.qti.hardware.capabilityconfigstore-impl.so|33a5f3622d7aa8a4e9e740d9996e8d8582184619
+vendor/lib64/vendor.qti.hardware.capabilityconfigstore-V1-ndk.so|296e777d5db65d8c8592a691cfa24dcc4f7c70c1
 
 # DPM - from Nothing Phone (3) Metroid C5.0-260819-1642
 vendor/bin/vendor.dpmd|bc0d7f0aa58ad0221d0f4650c1663dcd36471294
