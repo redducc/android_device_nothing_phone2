@@ -31,7 +31,7 @@ get_prop(vendor_hal_camera_default, aac_drc_prop)
 get_prop(vendor_hal_camera_default, vendor_soc_id_prop)
 
 # The vendor camera manager looks up the framework camera service.
-allow vendor_hal_camera_default fwk_camera_hwservice:hwservice_manager find;
+allow vendor_hal_camera_default fwk_camera_service:service_manager find;
 
 # HIDL graphics allocator/mapper client plumbing.
 allow vendor_hal_camera_default hidl_token_hwservice:hwservice_manager find;

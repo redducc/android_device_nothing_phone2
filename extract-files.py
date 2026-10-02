@@ -203,6 +203,8 @@ blob_fixups: blob_fixups_user_type = {
     'vendor/etc/init/vendor.noth.hardware.camera-service.rc': (
         blob_fixup().regex_replace(r'\bNtCamAlgoCapacity\b', 'CameraServiceCapacity')
     ),
+    'vendor/lib64/libntcamextened.so': blob_fixup()
+        .replace_needed('libntcamera2ndk_vendor_v1.so', 'libntcamera2ndk_vendor_v3.so'),
     'vendor/lib64/libntofflinepostproc.so': blob_fixup()
         .replace_needed('vendor.qti.hardware.camera.postproc@1.0.so', 'vendor.qti.hardware.camera.postproc@1.0-nothing.so')
         .add_needed('libcamhidl_shim.so')

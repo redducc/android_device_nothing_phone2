@@ -593,7 +593,6 @@ vendor/lib64/libnoteengine.so
 vendor/lib64/libntcamallocator.so
 vendor/lib64/libntcamcommonutils.so
 vendor/lib64/libntcamcore.so
-vendor/lib64/libntcamera2ndk_vendor_v1.so
 vendor/lib64/libntcamextened.so
 vendor/lib64/libntcamimage_io.so
 vendor/lib64/libntcammetadata.so
@@ -1252,6 +1251,9 @@ vendor/etc/vintf/manifest/cacert-saidl.xml|af590798b4f52238fb81ce2d14ef1a7b0546b
 vendor/lib64/libcacertclient.so|f1ec91e26c8b063a9128579d2b768c212a551ff5
 vendor/lib64/libjnihelper.so|89bf97cbb1c30af7b091674f5bbfc65b345af85b
 vendor/lib64/vendor.qti.hardware.cacertaidlservice-V1-ndk.so;MODULE_SUFFIX=_vendor|0a7fe2739f80311a6df89c74d9957643893e1ae0
+
+# Camera - from Nothing Phone (3) Metroid C5.0-260819-1642
+vendor/lib64/libntcamera2ndk_vendor_v3.so|9d722d8a044423ac2c61e710a35f3f16441af89c
 
 # CNE - from Nothing Phone (3) Metroid C5.0-260819-1642
 vendor/app/CneApp/CneApp.apk|c5e889119f6dd4bc71939d4bd2fe8b67e1bdfee7
