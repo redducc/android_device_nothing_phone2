@@ -1,16 +1,5 @@
 <manifest version="4.0" type="device" target-level="6">
     <kernel target-level="6"/>
-    <!-- DSP Service -->
-    <!-- fingerprint hal: using remote service instead of Google's default service-->
-    <hal format="hidl">
-        <name>vendor.qti.hardware.fingerprint</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>IQtiExtendedFingerprint</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
     <hal format="aidl">
         <name>android.hardware.gatekeeper</name>
         <fqname>IGatekeeper/default</fqname>
@@ -21,7 +10,6 @@
         <fqname>ISecureElement/SIM1</fqname>
         <fqname>ISecureElement/SIM2</fqname>
     </hal>
-    <!-- QSEECom HAL service -->
     <!-- SensorCal HAL service -->
     <hal format="hidl">
         <name>vendor.qti.hardware.sensorscalibrate</name>
@@ -30,27 +18,6 @@
         <interface>
             <name>ISensorsCalibrate</name>
             <instance>default</instance>
-        </interface>
-    </hal>
-
-    <!-- Factory HAL service -->
-    <hal format="hidl">
-        <name>vendor.qti.hardware.factory</name>
-        <transport>hwbinder</transport>
-        <version>1.1</version>
-        <interface>
-            <name>IFactory</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <!-- Secure image data processor HAL Service -->
-    <hal format="hidl">
-        <name>vendor.qti.hardware.secureprocessor.device</name>
-        <transport>hwbinder</transport>
-        <version>1.0</version>
-        <interface>
-            <name>ISecureProcessor</name>
-            <instance>qti-tee</instance>
         </interface>
     </hal>
     <!-- Camera PostProcessing service -->
@@ -63,7 +30,6 @@
             <instance>camerapostprocservice</instance>
         </interface>
     </hal>
-
     <!-- Camera AON service -->
     <hal format="hidl">
         <name>vendor.qti.hardware.camera.aon</name>
@@ -74,39 +40,9 @@
             <instance>aoncameraservice</instance>
         </interface>
     </hal>
-
     <hal format="aidl">
         <name>android.hardware.audio.core</name>
         <version>4</version>
         <fqname>IModule/bluetooth</fqname>
-    </hal>
-    <!-- SPU service-->
-    <hal format="hidl">
-        <name>vendor.qti.spu</name>
-        <transport>hwbinder</transport>
-        <version>1.1</version>
-        <interface>
-            <name>ISPUManager</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-    <hal format="hidl">
-        <name>vendor.qti.spu</name>
-        <transport>hwbinder</transport>
-        <version>2.0</version>
-        <interface>
-            <name>ISPUManager</name>
-            <instance>default</instance>
-        </interface>
-    </hal>
-<!-- QESDK HAL service -->
-    <hal format="hidl" optional="true">
-        <name>vendor.qti.qesdhal</name>
-        <transport>hwbinder</transport>
-        <version>1.1</version>
-        <interface>
-            <name>IQesdhal</name>
-            <instance>default</instance>
-        </interface>
     </hal>
 </manifest>
