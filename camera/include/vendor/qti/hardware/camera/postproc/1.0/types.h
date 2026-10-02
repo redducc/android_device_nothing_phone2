@@ -18,6 +18,7 @@ enum class Error : int32_t;
 enum class PostProcType : int32_t;
 struct Resolution;
 struct JpegCapabilities;
+struct YuvCapabilities;
 struct PostProcCapabilities;
 struct BufferParams;
 struct CreateParams;
@@ -144,15 +145,28 @@ static_assert(__alignof(::vendor::qti::hardware::camera::postproc::V1_0::JpegCap
  * This structure contains generic PostProc capabilities info.
  * This will be updated based on different postproc features supported
  */
+struct YuvCapabilities final {
+    uint32_t maxStreamsSupported __attribute__ ((aligned(4)));
+    ::vendor::qti::hardware::camera::postproc::V1_0::Resolution maxResoultion __attribute__ ((aligned(4)));
+    ::vendor::qti::hardware::camera::postproc::V1_0::Resolution minResolution __attribute__ ((aligned(4)));
+    ::android::hardware::hidl_vec<uint32_t> formats __attribute__ ((aligned(8)));
+};
+
+static_assert(offsetof(::vendor::qti::hardware::camera::postproc::V1_0::YuvCapabilities, maxStreamsSupported) == 0, "wrong offset");
+static_assert(offsetof(::vendor::qti::hardware::camera::postproc::V1_0::YuvCapabilities, maxResoultion) == 4, "wrong offset");
+static_assert(offsetof(::vendor::qti::hardware::camera::postproc::V1_0::YuvCapabilities, minResolution) == 12, "wrong offset");
+static_assert(offsetof(::vendor::qti::hardware::camera::postproc::V1_0::YuvCapabilities, formats) == 24, "wrong offset");
+static_assert(sizeof(::vendor::qti::hardware::camera::postproc::V1_0::YuvCapabilities) == 40, "wrong size");
+static_assert(__alignof(::vendor::qti::hardware::camera::postproc::V1_0::YuvCapabilities) == 8, "wrong alignment");
+
 struct PostProcCapabilities final {
-    /**
-     * JPEG stream capabilities
-     */
     ::vendor::qti::hardware::camera::postproc::V1_0::JpegCapabilities jpegStream __attribute__ ((aligned(8)));
+    ::vendor::qti::hardware::camera::postproc::V1_0::YuvCapabilities yuvStream __attribute__ ((aligned(8)));
 };
 
 static_assert(offsetof(::vendor::qti::hardware::camera::postproc::V1_0::PostProcCapabilities, jpegStream) == 0, "wrong offset");
-static_assert(sizeof(::vendor::qti::hardware::camera::postproc::V1_0::PostProcCapabilities) == 40, "wrong size");
+static_assert(offsetof(::vendor::qti::hardware::camera::postproc::V1_0::PostProcCapabilities, yuvStream) == 40, "wrong offset");
+static_assert(sizeof(::vendor::qti::hardware::camera::postproc::V1_0::PostProcCapabilities) == 80, "wrong size");
 static_assert(__alignof(::vendor::qti::hardware::camera::postproc::V1_0::PostProcCapabilities) == 8, "wrong alignment");
 
 /**
@@ -237,29 +251,23 @@ static_assert(__alignof(::vendor::qti::hardware::camera::postproc::V1_0::HandleP
  * This structure contains parameters given during postproc process request
  */
 struct ProcessRequestParams final {
-    /**
-     * Array of input handles
-     */
     ::android::hardware::hidl_vec<::vendor::qti::hardware::camera::postproc::V1_0::HandleParams> input __attribute__ ((aligned(8)));
-    /**
-     * Arry of output handles.
-     */
     ::android::hardware::hidl_vec<::vendor::qti::hardware::camera::postproc::V1_0::HandleParams> output __attribute__ ((aligned(8)));
-    /**
-     * Stream id, This indicates which index parameters provided during Init to use for encoding.
-     */
+    ::android::hardware::hidl_vec<::android::hardware::hidl_vec<uint8_t>> metadata __attribute__ ((aligned(8)));
     uint32_t streamId __attribute__ ((aligned(4)));
-    /**
-     * Metadata related to Camera
-     */
-    ::android::hardware::hidl_vec<uint8_t> metadata __attribute__ ((aligned(8)));
+    uint32_t frameNum __attribute__ ((aligned(4)));
+    uint32_t sequenceId __attribute__ ((aligned(4)));
+    ::vendor::qti::hardware::camera::postproc::V1_0::PostProcType postProcTypeVal __attribute__ ((aligned(4)));
 };
 
 static_assert(offsetof(::vendor::qti::hardware::camera::postproc::V1_0::ProcessRequestParams, input) == 0, "wrong offset");
 static_assert(offsetof(::vendor::qti::hardware::camera::postproc::V1_0::ProcessRequestParams, output) == 16, "wrong offset");
-static_assert(offsetof(::vendor::qti::hardware::camera::postproc::V1_0::ProcessRequestParams, streamId) == 32, "wrong offset");
-static_assert(offsetof(::vendor::qti::hardware::camera::postproc::V1_0::ProcessRequestParams, metadata) == 40, "wrong offset");
-static_assert(sizeof(::vendor::qti::hardware::camera::postproc::V1_0::ProcessRequestParams) == 56, "wrong size");
+static_assert(offsetof(::vendor::qti::hardware::camera::postproc::V1_0::ProcessRequestParams, metadata) == 32, "wrong offset");
+static_assert(offsetof(::vendor::qti::hardware::camera::postproc::V1_0::ProcessRequestParams, streamId) == 48, "wrong offset");
+static_assert(offsetof(::vendor::qti::hardware::camera::postproc::V1_0::ProcessRequestParams, frameNum) == 52, "wrong offset");
+static_assert(offsetof(::vendor::qti::hardware::camera::postproc::V1_0::ProcessRequestParams, sequenceId) == 56, "wrong offset");
+static_assert(offsetof(::vendor::qti::hardware::camera::postproc::V1_0::ProcessRequestParams, postProcTypeVal) == 60, "wrong offset");
+static_assert(sizeof(::vendor::qti::hardware::camera::postproc::V1_0::ProcessRequestParams) == 64, "wrong size");
 static_assert(__alignof(::vendor::qti::hardware::camera::postproc::V1_0::ProcessRequestParams) == 8, "wrong alignment");
 
 /**
@@ -281,29 +289,19 @@ static_assert(__alignof(::vendor::qti::hardware::camera::postproc::V1_0::JpegRes
  * Based on PostProcType, corresponding result structre will be used.
  */
 struct PostProcResult final {
-    /**
-     * requestId given to client as part of process API
-     */
     uint32_t requestId __attribute__ ((aligned(4)));
-    /**
-     * stream
-     */
     uint32_t streamId __attribute__ ((aligned(4)));
-    /**
-     * Postproc Type Value
-     */
     ::vendor::qti::hardware::camera::postproc::V1_0::PostProcType postProcTypeVal __attribute__ ((aligned(4)));
-    /**
-     * JPEG Result structure
-     */
     ::vendor::qti::hardware::camera::postproc::V1_0::JpegResult jpegResult __attribute__ ((aligned(4)));
+    uint32_t resultSize __attribute__ ((aligned(4)));
 };
 
 static_assert(offsetof(::vendor::qti::hardware::camera::postproc::V1_0::PostProcResult, requestId) == 0, "wrong offset");
 static_assert(offsetof(::vendor::qti::hardware::camera::postproc::V1_0::PostProcResult, streamId) == 4, "wrong offset");
 static_assert(offsetof(::vendor::qti::hardware::camera::postproc::V1_0::PostProcResult, postProcTypeVal) == 8, "wrong offset");
 static_assert(offsetof(::vendor::qti::hardware::camera::postproc::V1_0::PostProcResult, jpegResult) == 12, "wrong offset");
-static_assert(sizeof(::vendor::qti::hardware::camera::postproc::V1_0::PostProcResult) == 16, "wrong size");
+static_assert(offsetof(::vendor::qti::hardware::camera::postproc::V1_0::PostProcResult, resultSize) == 16, "wrong offset");
+static_assert(sizeof(::vendor::qti::hardware::camera::postproc::V1_0::PostProcResult) == 20, "wrong size");
 static_assert(__alignof(::vendor::qti::hardware::camera::postproc::V1_0::PostProcResult) == 4, "wrong alignment");
 
 //
@@ -381,6 +379,11 @@ static inline std::string toString(const ::vendor::qti::hardware::camera::postpr
 static inline void PrintTo(const ::vendor::qti::hardware::camera::postproc::V1_0::JpegCapabilities& o, ::std::ostream*);
 static inline bool operator==(const ::vendor::qti::hardware::camera::postproc::V1_0::JpegCapabilities& lhs, const ::vendor::qti::hardware::camera::postproc::V1_0::JpegCapabilities& rhs);
 static inline bool operator!=(const ::vendor::qti::hardware::camera::postproc::V1_0::JpegCapabilities& lhs, const ::vendor::qti::hardware::camera::postproc::V1_0::JpegCapabilities& rhs);
+
+static inline std::string toString(const ::vendor::qti::hardware::camera::postproc::V1_0::YuvCapabilities& o);
+static inline void PrintTo(const ::vendor::qti::hardware::camera::postproc::V1_0::YuvCapabilities& o, ::std::ostream*);
+static inline bool operator==(const ::vendor::qti::hardware::camera::postproc::V1_0::YuvCapabilities& lhs, const ::vendor::qti::hardware::camera::postproc::V1_0::YuvCapabilities& rhs);
+static inline bool operator!=(const ::vendor::qti::hardware::camera::postproc::V1_0::YuvCapabilities& lhs, const ::vendor::qti::hardware::camera::postproc::V1_0::YuvCapabilities& rhs);
 
 static inline std::string toString(const ::vendor::qti::hardware::camera::postproc::V1_0::PostProcCapabilities& o);
 static inline void PrintTo(const ::vendor::qti::hardware::camera::postproc::V1_0::PostProcCapabilities& o, ::std::ostream*);
@@ -647,12 +650,53 @@ static inline bool operator!=(const ::vendor::qti::hardware::camera::postproc::V
     return !(lhs == rhs);
 }
 
+static inline std::string toString(const ::vendor::qti::hardware::camera::postproc::V1_0::YuvCapabilities& o) {
+    using ::android::hardware::toString;
+    std::string os;
+    os += "{";
+    os += ".maxStreamsSupported = ";
+    os += ::android::hardware::toString(o.maxStreamsSupported);
+    os += ", .maxResoultion = ";
+    os += ::vendor::qti::hardware::camera::postproc::V1_0::toString(o.maxResoultion);
+    os += ", .minResolution = ";
+    os += ::vendor::qti::hardware::camera::postproc::V1_0::toString(o.minResolution);
+    os += ", .formats = ";
+    os += ::android::hardware::toString(o.formats);
+    os += "}"; return os;
+}
+
+static inline void PrintTo(const ::vendor::qti::hardware::camera::postproc::V1_0::YuvCapabilities& o, ::std::ostream* os) {
+    *os << toString(o);
+}
+
+static inline bool operator==(const ::vendor::qti::hardware::camera::postproc::V1_0::YuvCapabilities& lhs, const ::vendor::qti::hardware::camera::postproc::V1_0::YuvCapabilities& rhs) {
+    if (lhs.maxStreamsSupported != rhs.maxStreamsSupported) {
+        return false;
+    }
+    if (lhs.maxResoultion != rhs.maxResoultion) {
+        return false;
+    }
+    if (lhs.minResolution != rhs.minResolution) {
+        return false;
+    }
+    if (lhs.formats != rhs.formats) {
+        return false;
+    }
+    return true;
+}
+
+static inline bool operator!=(const ::vendor::qti::hardware::camera::postproc::V1_0::YuvCapabilities& lhs, const ::vendor::qti::hardware::camera::postproc::V1_0::YuvCapabilities& rhs){
+    return !(lhs == rhs);
+}
+
 static inline std::string toString(const ::vendor::qti::hardware::camera::postproc::V1_0::PostProcCapabilities& o) {
     using ::android::hardware::toString;
     std::string os;
     os += "{";
     os += ".jpegStream = ";
     os += ::vendor::qti::hardware::camera::postproc::V1_0::toString(o.jpegStream);
+    os += ", .yuvStream = ";
+    os += ::vendor::qti::hardware::camera::postproc::V1_0::toString(o.yuvStream);
     os += "}"; return os;
 }
 
@@ -662,6 +706,9 @@ static inline void PrintTo(const ::vendor::qti::hardware::camera::postproc::V1_0
 
 static inline bool operator==(const ::vendor::qti::hardware::camera::postproc::V1_0::PostProcCapabilities& lhs, const ::vendor::qti::hardware::camera::postproc::V1_0::PostProcCapabilities& rhs) {
     if (lhs.jpegStream != rhs.jpegStream) {
+        return false;
+    }
+    if (lhs.yuvStream != rhs.yuvStream) {
         return false;
     }
     return true;
@@ -768,10 +815,16 @@ static inline std::string toString(const ::vendor::qti::hardware::camera::postpr
     os += ::android::hardware::toString(o.input);
     os += ", .output = ";
     os += ::android::hardware::toString(o.output);
-    os += ", .streamId = ";
-    os += ::android::hardware::toString(o.streamId);
     os += ", .metadata = ";
     os += ::android::hardware::toString(o.metadata);
+    os += ", .streamId = ";
+    os += ::android::hardware::toString(o.streamId);
+    os += ", .frameNum = ";
+    os += ::android::hardware::toString(o.frameNum);
+    os += ", .sequenceId = ";
+    os += ::android::hardware::toString(o.sequenceId);
+    os += ", .postProcTypeVal = ";
+    os += ::vendor::qti::hardware::camera::postproc::V1_0::toString(o.postProcTypeVal);
     os += "}"; return os;
 }
 
@@ -817,6 +870,8 @@ static inline std::string toString(const ::vendor::qti::hardware::camera::postpr
     os += ::vendor::qti::hardware::camera::postproc::V1_0::toString(o.postProcTypeVal);
     os += ", .jpegResult = ";
     os += ::vendor::qti::hardware::camera::postproc::V1_0::toString(o.jpegResult);
+    os += ", .resultSize = ";
+    os += ::android::hardware::toString(o.resultSize);
     os += "}"; return os;
 }
 
@@ -835,6 +890,9 @@ static inline bool operator==(const ::vendor::qti::hardware::camera::postproc::V
         return false;
     }
     if (lhs.jpegResult != rhs.jpegResult) {
+        return false;
+    }
+    if (lhs.resultSize != rhs.resultSize) {
         return false;
     }
     return true;

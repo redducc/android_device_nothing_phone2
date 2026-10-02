@@ -17,6 +17,7 @@
 
 #include <dlfcn.h>
 
+#include <cstring>
 #include <mutex>
 #include <string>
 
@@ -88,22 +89,76 @@ hidlpp::PostProcCapabilities toHidl(const aidlpp::PostProcCapabilities& in) {
     return out;
 }
 
+// Nothing's PostProcResult has a size field for non-JPEG results next to the
+// JPEG one; only the one matching the type is meaningful, so it rides in
+// jpegResult.frameSize.
 aidlpp::PostProcResult toAidl(const hidlpp::PostProcResult& in) {
     aidlpp::PostProcResult out;
     out.requestId = in.requestId;
     out.streamId = in.streamId;
     out.postProcTypeVal = static_cast<aidlpp::PostProcType>(in.postProcTypeVal);
-    out.jpegResult.frameSize = in.jpegResult.frameSize;
+    out.jpegResult.frameSize = in.postProcTypeVal == hidlpp::PostProcType::JPEG
+                                       ? in.jpegResult.frameSize
+                                       : in.resultSize;
     return out;
 }
 
 hidlpp::PostProcResult toHidl(const aidlpp::PostProcResult& in) {
-    hidlpp::PostProcResult out;
+    hidlpp::PostProcResult out = {};
     out.requestId = in.requestId;
     out.streamId = in.streamId;
     out.postProcTypeVal = static_cast<hidlpp::PostProcType>(in.postProcTypeVal);
-    out.jpegResult.frameSize = in.jpegResult.frameSize;
+    if (out.postProcTypeVal == hidlpp::PostProcType::JPEG) {
+        out.jpegResult.frameSize = in.jpegResult.frameSize;
+    } else {
+        out.resultSize = in.jpegResult.frameSize;
+    }
     return out;
+}
+
+// Nothing's ProcessRequestParams carries several metadata buffers plus frame
+// number, sequence id and type, which the AIDL parcelable lacks. Pack them in
+// front of the metadata bytes: frameNum, sequenceId, type, count, sizes, data.
+std::vector<uint8_t> packMetadata(const hidlpp::ProcessRequestParams& in) {
+    std::vector<uint32_t> header = {in.frameNum, in.sequenceId,
+                                    static_cast<uint32_t>(in.postProcTypeVal),
+                                    static_cast<uint32_t>(in.metadata.size())};
+    for (const auto& m : in.metadata) header.push_back(m.size());
+
+    std::vector<uint8_t> out(header.size() * sizeof(uint32_t));
+    memcpy(out.data(), header.data(), out.size());
+    for (const auto& m : in.metadata) out.insert(out.end(), m.begin(), m.end());
+    return out;
+}
+
+bool unpackMetadata(const std::vector<uint8_t>& in, hidlpp::ProcessRequestParams* out) {
+    auto readU32 = [&](size_t& pos, uint32_t* v) {
+        if (pos + sizeof(uint32_t) > in.size()) return false;
+        memcpy(v, in.data() + pos, sizeof(uint32_t));
+        pos += sizeof(uint32_t);
+        return true;
+    };
+
+    size_t pos = 0;
+    uint32_t type, count;
+    if (!readU32(pos, &out->frameNum) || !readU32(pos, &out->sequenceId) ||
+        !readU32(pos, &type) || !readU32(pos, &count)) {
+        return false;
+    }
+    out->postProcTypeVal = static_cast<hidlpp::PostProcType>(type);
+
+    std::vector<uint32_t> sizes(count);
+    for (auto& size : sizes) {
+        if (!readU32(pos, &size)) return false;
+    }
+
+    out->metadata.resize(count);
+    for (uint32_t i = 0; i < count; i++) {
+        if (sizes[i] > in.size() - pos) return false;
+        out->metadata[i] = std::vector<uint8_t>(in.begin() + pos, in.begin() + pos + sizes[i]);
+        pos += sizes[i];
+    }
+    return true;
 }
 
 /* Provider side: AIDL service over the in-process HIDL implementation. */
@@ -152,7 +207,11 @@ class AidlSession : public aidlpp::BnPostProcSession {
         hparams.input = convert(params.input);
         hparams.output = convert(params.output);
         hparams.streamId = params.streamId;
-        hparams.metadata = std::vector<uint8_t>(params.metadata.begin(), params.metadata.end());
+        if (!unpackMetadata(params.metadata, &hparams)) {
+            for (auto* nh : handles) native_handle_delete(nh);
+            mCb->mCb->notifyRequestId(aidlpp::Error::DEVICE_BAD_STATE, 0);
+            return ndk::ScopedAStatus::ok();
+        }
 
         uint32_t requestId = 0;
         hidlpp::Error error = hidlpp::Error::POSTPROC_FAIL;
@@ -267,7 +326,7 @@ class HidlSession : public hidlpp::IPostProcSession {
         aparams.input = convert(params.input);
         aparams.output = convert(params.output);
         aparams.streamId = params.streamId;
-        aparams.metadata.assign(params.metadata.begin(), params.metadata.end());
+        aparams.metadata = packMetadata(params);
 
         {
             std::lock_guard<std::mutex> cbLock(mCb->mLock);
