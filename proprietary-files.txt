@@ -836,13 +836,6 @@ vendor/etc/init/android.hardware.security.keymint-service-qti.rc
 vendor/etc/vintf/manifest/android.hardware.security.keymint-service-qti.xml
 vendor/lib64/libqtikeymint.so
 
-# Limits
-vendor/bin/hw/vendor.qti.hardware.limits@1.1-service
-vendor/etc/init/vendor.qti.hardware.limits-service.rc
-vendor/etc/vintf/manifest/vendor.qti.hardware.limits-service.xml
-vendor/lib64/vendor.qti.hardware.limits@1.0.so;MODULE_SUFFIX=_vendor
-vendor/lib64/vendor.qti.hardware.limits@1.1.so;MODULE_SUFFIX=_vendor
-
 # Media
 vendor/etc/media_cape/video_system_specs.json
 vendor/etc/media_codecs.xml
