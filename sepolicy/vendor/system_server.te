@@ -1,0 +1,4 @@
+# PowerInsight reads battery stats from the power_supply nodes
+r_dir_file(system_server, vendor_sysfs_battery_supply)
+
+hal_client_domain(system_server, vendor_hal_snapx_service_qti)
