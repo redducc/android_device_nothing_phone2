@@ -133,6 +133,12 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/generic_ramdisk.mk)
 PRODUCT_COPY_FILES += \
     $(DEVICE_PATH)/configs/gps/gps.conf:$(TARGET_COPY_OUT_VENDOR)/etc/gps.conf
 
+PRODUCT_PACKAGES += \
+    libgnsspps \
+    libloc_base_util \
+    libloc_socket \
+    libsynergy_loc_api
+
 # Health
 $(call inherit-product, vendor/qcom/opensource/healthd-ext/health-vendor-product.mk)
 
